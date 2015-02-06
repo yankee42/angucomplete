@@ -52,8 +52,8 @@ angular.module('angucomplete', [] )
             }
 
             isNewSearchNeeded = function(newTerm, oldTerm) {
-                return newTerm.length >= $scope.minLength && newTerm != oldTerm
-            }
+                return newTerm.length >= $scope.minLength && newTerm != oldTerm;
+            };
 
             $scope.processResults = function(responseData, str) {
                 if (responseData && responseData.length > 0) {
@@ -99,7 +99,7 @@ angular.module('angucomplete', [] )
                             description: description,
                             image: image,
                             originalObject: responseData[i]
-                        }
+                        };
 
                         $scope.results[$scope.results.length] = resultRow;
                     }
@@ -108,7 +108,7 @@ angular.module('angucomplete', [] )
                 } else {
                     $scope.results = [];
                 }
-            }
+            };
 
             $scope.searchTimerComplete = function(str) {
                 // Begin the search
@@ -145,7 +145,7 @@ angular.module('angucomplete', [] )
                             });
                     }
                 }
-            }
+            };
 
             $scope.hideResults = function() {
                 $scope.hideTimer = $timeout(function() {
@@ -156,12 +156,12 @@ angular.module('angucomplete', [] )
             $scope.resetHideResults = function() {
                 if($scope.hideTimer) {
                     $timeout.cancel($scope.hideTimer);
-                };
+                }
             };
 
             $scope.hoverRow = function(index) {
                 $scope.currentIndex = index;
-            }
+            };
 
             $scope.keyPressed = function(event) {
                 if (!(event.which == KEY_ARROW_UP || event.which == KEY_ARROW_DOWN || event.which == KEY_ENTER)) {
@@ -169,7 +169,7 @@ angular.module('angucomplete', [] )
                         $scope.showDropdown = false;
                         $scope.lastSearchTerm = null
                     } else if (isNewSearchNeeded($scope.searchStr, $scope.lastSearchTerm)) {
-                        $scope.lastSearchTerm = $scope.searchStr
+                        $scope.lastSearchTerm = $scope.searchStr;
                         $scope.showDropdown = true;
                         $scope.currentIndex = -1;
                         $scope.results = [];
@@ -187,7 +187,7 @@ angular.module('angucomplete', [] )
                 } else {
                     event.preventDefault();
                 }
-            }
+            };
 
             $scope.selectResult = function(result) {
                 if ($scope.matchClass) {
@@ -198,7 +198,7 @@ angular.module('angucomplete', [] )
                 $scope.showDropdown = false;
                 $scope.results = [];
                 //$scope.$apply();
-            }
+            };
 
             var inputField = elem.find('input');
 
