@@ -6,6 +6,11 @@
 
 angular.module('angucomplete', [] )
     .directive('angucomplete', function ($parse, $http, $sce, $timeout) {
+    var KEY_ARROW_UP = 38,
+        KEY_ARROW_DOWN = 40,
+        KEY_ENTER = 13,
+        KEY_ESCAPE = 27,
+        KEY_BACKSPACE = 8;
     return {
         restrict: 'EA',
         scope: {
@@ -159,7 +164,7 @@ angular.module('angucomplete', [] )
             }
 
             $scope.keyPressed = function(event) {
-                if (!(event.which == 38 || event.which == 40 || event.which == 13)) {
+                if (!(event.which == KEY_ARROW_UP || event.which == KEY_ARROW_DOWN || event.which == KEY_ENTER)) {
                     if (!$scope.searchStr || $scope.searchStr == "") {
                         $scope.showDropdown = false;
                         $scope.lastSearchTerm = null
@@ -200,7 +205,7 @@ angular.module('angucomplete', [] )
             inputField.on('keyup', $scope.keyPressed);
 
             elem.on("keyup", function (event) {
-                if(event.which === 40) {
+                if(event.which === KEY_ARROW_DOWN) {
                     if ($scope.results && ($scope.currentIndex + 1) < $scope.results.length) {
                         $scope.currentIndex ++;
                         $scope.$apply();
@@ -209,7 +214,7 @@ angular.module('angucomplete', [] )
                     }
 
                     $scope.$apply();
-                } else if(event.which == 38) {
+                } else if(event.which == KEY_ARROW_UP) {
                     if ($scope.currentIndex >= 1) {
                         $scope.currentIndex --;
                         $scope.$apply();
@@ -217,7 +222,7 @@ angular.module('angucomplete', [] )
                         event.stopPropagation();
                     }
 
-                } else if (event.which == 13) {
+                } else if (event.which == KEY_ENTER) {
                     if ($scope.results && $scope.currentIndex >= 0 && $scope.currentIndex < $scope.results.length) {
                         $scope.selectResult($scope.results[$scope.currentIndex]);
                         $scope.$apply();
@@ -230,11 +235,11 @@ angular.module('angucomplete', [] )
                         event.stopPropagation();
                     }
 
-                } else if (event.which == 27) {
+                } else if (event.which == KEY_ESCAPE) {
                     $scope.results = [];
                     $scope.showDropdown = false;
                     $scope.$apply();
-                } else if (event.which == 8) {
+                } else if (event.which == KEY_BACKSPACE) {
                     $scope.selectedObject = null;
                     $scope.$apply();
                 }
