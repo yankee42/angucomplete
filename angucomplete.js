@@ -51,7 +51,7 @@ angular.module('angucomplete', [] )
                 $scope.pause = $scope.userPause;
             }
 
-            isNewSearchNeeded = function(newTerm, oldTerm) {
+            var isNewSearchNeeded = function(newTerm, oldTerm) {
                 return newTerm.length >= $scope.minLength && newTerm != oldTerm;
             };
 
@@ -94,14 +94,12 @@ angular.module('angucomplete', [] )
                             text = $sce.trustAsHtml(text.replace(re, '<span class="'+ $scope.matchClass +'">'+ strPart +'</span>'));
                         }
 
-                        var resultRow = {
+                        $scope.results[$scope.results.length] = {
                             title: text,
                             description: description,
                             image: image,
                             originalObject: responseData[i]
                         };
-
-                        $scope.results[$scope.results.length] = resultRow;
                     }
 
 
